@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Learning Box</title><link>https://github.com/Supr4pt0?tab=repositories/</link><description>This site is my teaching and learning box to learn Python, Data Analysis, a bit of Chemistry esspecially Analytical Chemistry... that hopefully capable to explore Chemometric and Chemoinformatic</description><atom:link href="https://github.com/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>id</language><copyright>Contents © 2019 &lt;a href="mailto:van.plaosan@gmail.com"&gt;Suprapto van Plaosan&lt;/a&gt; </copyright><lastBuildDate>Sat, 01 Jun 2019 22:08:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Belajar LDA Menggunakan Python</title><link>https://github.com/posts/belajar-lda-menggunakan-python/</link><dc:creator>Suprapto van Plaosan</dc:creator><description>&lt;div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_5ec1a3d727344b23b3dac3b09a6f2ee9-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.discriminant_analysis&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LinearDiscriminantAnalysis&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_a39f940b3f5145828bcf38fe20440d73-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;a name="rest_code_a39f940b3f5145828bcf38fe20440d73-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'iris.csv'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_37fdd820f8524b75994948327d9988c0-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Unnamed: 0'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_37fdd820f8524b75994948327d9988c0-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+      &lt;th&gt;class&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_7b8351c8f5c54815a411052d837138c2-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_7b8351c8f5c54815a411052d837138c2-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_22eb70848cad47b0a87ca311b3ec8a25-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_22eb70848cad47b0a87ca311b3ec8a25-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LabelEncoder&lt;/span&gt;
+&lt;a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LabelEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_15f1e76b0c5542c19772ee931f1ae822-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;lda&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LinearDiscriminantAnalysis&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_components&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_a771d44328a148b99ce479ad003aa81a-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;x_lda&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lda&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;mpl_toolkits.mplot3d&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Axes3D&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-4"&gt;&lt;/a&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; inline
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-5"&gt;&lt;/a&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-6"&gt;&lt;/a&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Axes3D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;elev&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;azim&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-8"&gt;&lt;/a&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'red'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'blue'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'purple'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-9"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_lda&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;x_lda&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;edgecolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'k'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-10"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"First three LDA directions"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"1st Kolom"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-12"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_xaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-13"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"2nd Kolom"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-14"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_yaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-15"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_zlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"3rd Kolom"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-16"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_zaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_0f4111b990a745cb97660f12ada8387a-17"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;img alt="output_8_0.png" src="https://github.com/posts/belajar-lda-menggunakan-python/output_8_0.png"&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_937bc80cdf954484a132360dce986a51-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_937bc80cdf954484a132360dce986a51-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_lda&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;x_lda&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;edgecolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'k'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;a name="rest_code_937bc80cdf954484a132360dce986a51-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"1st Kolom"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_937bc80cdf954484a132360dce986a51-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"2nd Kolom"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+Text(0, 0.5, '2nd Kolom')
+&lt;/pre&gt;
+&lt;img alt="output_9_1.png" src="https://github.com/posts/belajar-lda-menggunakan-python/output_9_1.png"&gt;&lt;/div&gt;</description><guid>https://github.com/posts/belajar-lda-menggunakan-python/</guid><pubDate>Sat, 01 Jun 2019 14:32:55 GMT</pubDate></item><item><title>Belajar PCA Menggunakan Python</title><link>https://github.com/posts/belajar-pca-menggunakan-python/</link><dc:creator>Suprapto van Plaosan</dc:creator><description>&lt;div&gt;&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Moofushi_Kandu_fish.jpg/450px-Moofushi_Kandu_fish.jpg"&gt;&lt;img alt="" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Moofushi_Kandu_fish.jpg/450px-Moofushi_Kandu_fish.jpg"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Photo by: Bruno de Giusti - Own work, An underwater picture taken in Moofushi Kandu, Maldives, showing a huge amount of fish./Creative Commons License&lt;/p&gt;
+&lt;p&gt;Untuk mengklasterisasi data menggunakan Software Python, kita perlu mengimpor PCA dari scikitlearn decomposition.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_cea4558051954cdfab20a9e6609e3b76-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.decomposition&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;PCA&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Pada contoh ini kita akan mengklasterisasi dataset bungan iris menggunakan PCA.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_dea2bf940dad46d999db8e98021dac77-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;a name="rest_code_dea2bf940dad46d999db8e98021dac77-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'iris.csv'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Berikut adalah 5 data pertama dari dataset bunga iris yang akan kita klasterisasi.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_8f0319094af6415a902f7d58a77d3274-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Unnamed: 0'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8f0319094af6415a902f7d58a77d3274-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+      &lt;th&gt;class&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;p&gt;Data dalam kolom 1 sampai dengan 4 akan kita klasterisasi dengan PCA untuk mengetahui apakah PCA bisa membedakan masing-masing spesies bunga iris.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_5e1558273a434765825e1cea194b4316-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_5e1558273a434765825e1cea194b4316-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;p&gt;Sedangan data spesies akan kita gunakan untuk pelabelan masing-masing titik pada klaster PCA.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_5bb640efd70341a0a5afa4e6be6776ad-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_5bb640efd70341a0a5afa4e6be6776ad-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
+&lt;/pre&gt;
+&lt;p&gt;Karena data spesies berupa "string", kita akan rubah masing-masing spesies ke dalam kode angka. Angka 0 untuk Iris Setosa, 1 untuk Iris Versicolor dan 2 untuk Iris Virginica.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LabelEncoder&lt;/span&gt;
+&lt;a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LabelEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+&lt;/pre&gt;
+&lt;p&gt;Data X diklasterisasi dengan komponen klaster sebanyak 3 dan didapatkan matriks kovarians.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_89028db434c849f2a44dcb279779e35f-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;pca&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;PCA&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_components&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_f76e3d0f5a974086969b23fdb3e484ef-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pca&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit_transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_581e3ca5859f45e897863611cd8a2709-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;covmat&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cov&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_a4ab33f5c0ed418a955cbb2ba7eea2aa-1"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;covmat&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[[ 4.22484077e+00 -2.94320869e-16  8.79237026e-17]
+ [-2.94320869e-16  2.42243572e-01 -2.26329023e-17]
+ [ 8.79237026e-17 -2.26329023e-17  7.85239081e-02]]
+&lt;/pre&gt;
+&lt;p&gt;Dari data matriks kovarians dicari nilai "eigenvalue" dan "eigenvector" nya. Kemudian didapatkan nilai "explained variance" yang akan digunakn untuk menggambar "scree plot".&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_a50974bdbc414f3288bfa21935073944-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;eigenvec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;covmat&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_dda8b800a85c4eec8091e1b4bd240ac5-1"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[4.22484077 0.24224357 0.07852391]
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_bbd851081fac429ea7e1b544439c9340-1"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenvec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[[ 1.00000000e+00 -7.39017416e-17 -2.12052541e-17]
+ [ 0.00000000e+00 -1.00000000e+00  1.95787855e-16]
+ [ 0.00000000e+00  1.11022302e-16  1.00000000e+00]]
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_4d2b0e312b55410c81c6cf253bd92bbe-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;eig_pairs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt;&lt;span class="n"&gt;eigenvec&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+&lt;a name="rest_code_4d2b0e312b55410c81c6cf253bd92bbe-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;tot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_66c857df2e3f485cb893ef5961e45281-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;var_exp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eigenval&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;a name="rest_code_66c857df2e3f485cb893ef5961e45281-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;var_exp&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[92.94335406356555, 5.32917837193454, 1.727467564499914]
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_133fca8d7af14a4fa40a7ffb5a3b6c27-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;cum_var_exp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cumsum&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;var_exp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_133fca8d7af14a4fa40a7ffb5a3b6c27-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cum_var_exp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[ 92.94335406  98.27253244 100.        ]
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;var_exp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;align&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'center'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Individual Explained Variance'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-6"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;step&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;cum_var_exp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'r-'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;where&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'mid'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'Cumulative Explained Variance'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Explained Variance Ratio'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-8"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Principal Component'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_d525dd453b6841ad815cbe214d31af92-9"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;legend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loc&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'best'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+&amp;lt;matplotlib.legend.Legend at 0xc90efaf630&amp;gt;
+&lt;/pre&gt;
+&lt;img alt="output_17_1.png" src="https://github.com/posts/belajar-pca-menggunakan-python/output_17_1.png"&gt;
+&lt;p&gt;Kurva "scatter" tiga dimensi dibuat dengan sumbu berupa "eigenvector" pertama sebagai sumbu "x", "eigenvector" kedua sebagai sumbu "y" dan "eigenvector" ketiga sebagai sumbu "z".&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;mpl_toolkits.mplot3d&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Axes3D&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-2"&gt;&lt;/a&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Axes3D&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;elev&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;150&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;azim&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;110&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;'red'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'blue'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'purple'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-6"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;edgecolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'k'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-7"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"First three PCA directions"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-8"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"1st eigenvector"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-9"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_xaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-10"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"2nd eigenvector"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-11"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_yaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-12"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_zlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"3rd eigenvector"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-13"&gt;&lt;/a&gt;&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w_zaxis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ticklabels&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-14"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;img alt="output_18_0.png" src="https://github.com/posts/belajar-pca-menggunakan-python/output_18_0.png"&gt;
+&lt;p&gt;Kurva "scatter" dua dimensi juga bisa ditampilkan menggunakan "eigenvector" pertama sebagai sumbu "x" dan "eigenvector" kedua sebagai sumbu "y"&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_a26fe0de41f94f11a8aa3cb80eda88b9-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_a26fe0de41f94f11a8aa3cb80eda88b9-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;x_pca&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="n"&gt;edgecolor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'k'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;colormap&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+&amp;lt;matplotlib.collections.PathCollection at 0xc90d99dc50&amp;gt;
+&lt;/pre&gt;
+&lt;img alt="output_19_1.png" src="https://github.com/posts/belajar-pca-menggunakan-python/output_19_1.png"&gt;&lt;/div&gt;</description><category>PCA</category><guid>https://github.com/posts/belajar-pca-menggunakan-python/</guid><pubDate>Sat, 01 Jun 2019 14:18:24 GMT</pubDate></item><item><title>Belajar KMeans Menggunakan Python </title><link>https://github.com/posts/kmeans/</link><dc:creator>Suprapto van Plaosan</dc:creator><description>&lt;div&gt;&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/homegarden/firewood-01.jpg"&gt;&lt;img alt="https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/homegarden/firewood-01.jpg" src="https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/homegarden/firewood-01.jpg"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;Photo by Horia Varlan/Flickr/Creative Commons License&lt;/p&gt;
+&lt;div class="section" id="apa-itu-kmeans"&gt;
+&lt;h2&gt;Apa itu KMeans?&lt;/h2&gt;
+&lt;p&gt;KMeans merupakan metode klasterisasi yang mudah dan sederhana.
+Klasterisasi KMeans didasarkan pada kedekatan data. Jarak antar titik
+data dapat diukur menggunakan metode &lt;em&gt;Eucledian&lt;/em&gt;, &lt;em&gt;Mnhattan&lt;/em&gt; atau
+&lt;em&gt;Minkowski&lt;/em&gt;. Berikut adalah klasterisasi KMeans menggunkan Python dengan
+menggunakan dataset bunga Iris.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_681716a7ebca4ecaa47af100ebfa44de-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.cluster&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;KMeans&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_b6734aa48a0d428380fd449390d87b0d-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_fa598d3fa79b49dea4e46dde60f08302-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'iris.data'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;names&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'sepal_length'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'sepal_width'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'petal_length'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'petal_width'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_ca97dcf88ba348f8bd5f2177e00a5678-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+      &lt;th&gt;class&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+      &lt;td&gt;Iris-setosa&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_fdba8e4335d0425790cb9ff268488711-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'iris.csv'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_060bd69895e04b26ac50d3ffcc2eaa37-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;count&lt;/th&gt;
+      &lt;td&gt;150.000000&lt;/td&gt;
+      &lt;td&gt;150.000000&lt;/td&gt;
+      &lt;td&gt;150.000000&lt;/td&gt;
+      &lt;td&gt;150.000000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;td&gt;5.843333&lt;/td&gt;
+      &lt;td&gt;3.054000&lt;/td&gt;
+      &lt;td&gt;3.758667&lt;/td&gt;
+      &lt;td&gt;1.198667&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;std&lt;/th&gt;
+      &lt;td&gt;0.828066&lt;/td&gt;
+      &lt;td&gt;0.433594&lt;/td&gt;
+      &lt;td&gt;1.764420&lt;/td&gt;
+      &lt;td&gt;0.763161&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;min&lt;/th&gt;
+      &lt;td&gt;4.300000&lt;/td&gt;
+      &lt;td&gt;2.000000&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.100000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;25%&lt;/th&gt;
+      &lt;td&gt;5.100000&lt;/td&gt;
+      &lt;td&gt;2.800000&lt;/td&gt;
+      &lt;td&gt;1.600000&lt;/td&gt;
+      &lt;td&gt;0.300000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;50%&lt;/th&gt;
+      &lt;td&gt;5.800000&lt;/td&gt;
+      &lt;td&gt;3.000000&lt;/td&gt;
+      &lt;td&gt;4.350000&lt;/td&gt;
+      &lt;td&gt;1.300000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;75%&lt;/th&gt;
+      &lt;td&gt;6.400000&lt;/td&gt;
+      &lt;td&gt;3.300000&lt;/td&gt;
+      &lt;td&gt;5.100000&lt;/td&gt;
+      &lt;td&gt;1.800000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;max&lt;/th&gt;
+      &lt;td&gt;7.900000&lt;/td&gt;
+      &lt;td&gt;4.400000&lt;/td&gt;
+      &lt;td&gt;6.900000&lt;/td&gt;
+      &lt;td&gt;2.500000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_d4b0483e13784fb6bb3241b7bc5627cb-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;seaborn&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;sb&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_817bde06fc3e4e0893fafa13c526bed3-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pairplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hue&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_817bde06fc3e4e0893fafa13c526bed3-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map_lower&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;kdeplot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_817bde06fc3e4e0893fafa13c526bed3-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;map_diag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;kdeplot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+&amp;lt;seaborn.axisgrid.PairGrid at 0xc30557f470&amp;gt;
+&lt;/pre&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59818429_1100439006809636_6448269795757391872_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=4b27d47553f4ff23b631e0ca7e00d5c5&amp;amp;oe=5D73F420"&gt;&lt;img alt="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59818429_1100439006809636_6448269795757391872_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=4b27d47553f4ff23b631e0ca7e00d5c5&amp;amp;oe=5D73F420" src="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59818429_1100439006809636_6448269795757391872_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=4b27d47553f4ff23b631e0ca7e00d5c5&amp;amp;oe=5D73F420"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_f17098fb8fdd44ff97ce2dfeccc778ba-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;corr&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;-0.109369&lt;/td&gt;
+      &lt;td&gt;0.871754&lt;/td&gt;
+      &lt;td&gt;0.817954&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;td&gt;-0.109369&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;-0.420516&lt;/td&gt;
+      &lt;td&gt;-0.356544&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;td&gt;0.871754&lt;/td&gt;
+      &lt;td&gt;-0.420516&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+      &lt;td&gt;0.962757&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+      &lt;td&gt;0.817954&lt;/td&gt;
+      &lt;td&gt;-0.356544&lt;/td&gt;
+      &lt;td&gt;0.962757&lt;/td&gt;
+      &lt;td&gt;1.000000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_c20d13b52c394a94a9be227eea852bf8-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;corr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;corr&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_c20d13b52c394a94a9be227eea852bf8-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c20d13b52c394a94a9be227eea852bf8-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heatmap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;corr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;square&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;annot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'.2g'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'viridis'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;linewidths&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+&amp;lt;matplotlib.axes._subplots.AxesSubplot at 0xc3068b06a0&amp;gt;
+&lt;/pre&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59353387_1100438986809638_3005136136805810176_n.jpg?_nc_cat=105&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2d26ca7201456c78f006a5c3f4d7944a&amp;amp;oe=5D2DA763"&gt;&lt;img alt="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59353387_1100438986809638_3005136136805810176_n.jpg?_nc_cat=105&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2d26ca7201456c78f006a5c3f4d7944a&amp;amp;oe=5D2DA763" src="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59353387_1100438986809638_3005136136805810176_n.jpg?_nc_cat=105&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2d26ca7201456c78f006a5c3f4d7944a&amp;amp;oe=5D2DA763"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_8753ef82c265474882eafd4d702ed3b0-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_8753ef82c265474882eafd4d702ed3b0-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;clustermap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;corr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;square&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;annot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'.2g'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'viridis'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;linewidths&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+&amp;lt;seaborn.matrix.ClusterGrid at 0xc3075c4f28&amp;gt;
+&lt;/pre&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59476969_1100438993476304_3869992320854130688_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=65323b499ccaba7f81547654262e0c34&amp;amp;oe=5D644192"&gt;&lt;img alt="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59476969_1100438993476304_3869992320854130688_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=65323b499ccaba7f81547654262e0c34&amp;amp;oe=5D644192" src="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59476969_1100438993476304_3869992320854130688_n.jpg?_nc_cat=111&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=65323b499ccaba7f81547654262e0c34&amp;amp;oe=5D644192"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_d994a9877d7d4f90bd02103aa3c81af1-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_d994a9877d7d4f90bd02103aa3c81af1-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;sepal_length&lt;/th&gt;
+      &lt;th&gt;sepal_width&lt;/th&gt;
+      &lt;th&gt;petal_length&lt;/th&gt;
+      &lt;th&gt;petal_width&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;5.1&lt;/td&gt;
+      &lt;td&gt;3.5&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;4.9&lt;/td&gt;
+      &lt;td&gt;3.0&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;4.7&lt;/td&gt;
+      &lt;td&gt;3.2&lt;/td&gt;
+      &lt;td&gt;1.3&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;4.6&lt;/td&gt;
+      &lt;td&gt;3.1&lt;/td&gt;
+      &lt;td&gt;1.5&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;5.0&lt;/td&gt;
+      &lt;td&gt;3.6&lt;/td&gt;
+      &lt;td&gt;1.4&lt;/td&gt;
+      &lt;td&gt;0.2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_93f92f36bb644114bb7f3ae2e9ed2e60-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'class'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;a name="rest_code_93f92f36bb644114bb7f3ae2e9ed2e60-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_d5f1f3b918de49a7bc39e0e691a8d643-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.preprocessing&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LabelEncoder&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_f73df03c75f74ba6babd467b6f64c635-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;LabelEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_fc2bb37f55e24cdbbf0f2a9f797ac727-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;lbe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_5907b1218498408790d75946d16adfba-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;Y&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_27ea0e53d6d14d0ba87c44f693618bdd-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;kmeans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;KMeans&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_clusters&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_2660a143ea144f9f88880bee2c63bbf4-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;kmeans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+KMeans(algorithm='auto', copy_x=True, init='k-means++', max_iter=300,
+    n_clusters=3, n_init=10, n_jobs=None, precompute_distances='auto',
+    random_state=None, tol=0.0001, verbose=0)
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_ece619d866dc4e4a8092ad99015738bb-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;kmeans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;predict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_5c9a7832f6d946588cfa1b4c53b870cc-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_48b0830448324e5da9916a5dbfd836e5-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;centers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;kmeans&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cluster_centers_&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_f49c48f8713c4e09a2f368b2f58b1d4a-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iloc&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'viridis'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_f49c48f8713c4e09a2f368b2f58b1d4a-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scatter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;centers&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;centers&lt;/span&gt;&lt;span class="p"&gt;[:,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'black'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2500&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.75&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_f49c48f8713c4e09a2f368b2f58b1d4a-3"&gt;&lt;/a&gt;
+&lt;a name="rest_code_f49c48f8713c4e09a2f368b2f58b1d4a-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59464707_1100439016809635_4075055092020019200_n.jpg?_nc_cat=110&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2917a0bfca94c9ead0e6233adb161dc0&amp;amp;oe=5D30180D"&gt;&lt;img alt="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59464707_1100439016809635_4075055092020019200_n.jpg?_nc_cat=110&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2917a0bfca94c9ead0e6233adb161dc0&amp;amp;oe=5D30180D" src="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59464707_1100439016809635_4075055092020019200_n.jpg?_nc_cat=110&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=2917a0bfca94c9ead0e6233adb161dc0&amp;amp;oe=5D30180D"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_98b818e99d0c464abd764b841c8973fb-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;confusion_matrix&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_cc9fd2d44ba247ac89d0e59e56cd5c55-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;confusion_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+array([[ 0, 50,  0],
+       [ 2,  0, 48],
+       [36,  0, 14]], dtype=int64)
+&lt;/pre&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_ebb8b9f51b174494aab44bfa51016e24-1"&gt;&lt;/a&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;confusion_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_ebb8b9f51b174494aab44bfa51016e24-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.25&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_ebb8b9f51b174494aab44bfa51016e24-3"&gt;&lt;/a&gt;&lt;span class="n"&gt;sb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;heatmap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;conf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;square&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;annot&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'.2g'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmap&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'viridis'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;linewidths&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_ebb8b9f51b174494aab44bfa51016e24-4"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Predicted Value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_ebb8b9f51b174494aab44bfa51016e24-5"&gt;&lt;/a&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'True Value'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+Text(78.90000000000006, 0.5, 'True Value')
+&lt;/pre&gt;
+&lt;div class="figure"&gt;
+&lt;a class="reference external image-reference" href="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59705849_1100439040142966_499805421544931328_n.jpg?_nc_cat=106&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=36a4300e697cd3ee999d6c255e20d1a2&amp;amp;oe=5D31E4DD"&gt;&lt;img alt="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59705849_1100439040142966_499805421544931328_n.jpg?_nc_cat=106&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=36a4300e697cd3ee999d6c255e20d1a2&amp;amp;oe=5D31E4DD" src="https://scontent.fsub7-1.fna.fbcdn.net/v/t1.0-9/59705849_1100439040142966_499805421544931328_n.jpg?_nc_cat=106&amp;amp;_nc_ht=scontent.fsub7-1.fna&amp;amp;oh=36a4300e697cd3ee999d6c255e20d1a2&amp;amp;oe=5D31E4DD"&gt;&lt;/a&gt;
+&lt;/div&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_db698d3478f249b48189812c7a8cdda7-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;accuracy_score&lt;/span&gt;
+&lt;a name="rest_code_db698d3478f249b48189812c7a8cdda7-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;accuracy_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.09333333333333334
+&lt;/pre&gt;
+&lt;div class="section" id="adjusted-mutual-information"&gt;
+&lt;h3&gt;Adjusted Mutual Information&lt;/h3&gt;
+&lt;p&gt;Metrik ini merupakan pengukuran simetris: perbandingan label_true dengan
+label_pred akan menghasilkan nilai skor yang sama. Ini bisa bermanfaat
+untuk mengukur kesesuaian dua label independen pada dataset yang sama
+ketika label yang sebenarnya tidak diketahui.&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_700cc4d287544b2cb415034731d43a8a-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;adjusted_mutual_info_score&lt;/span&gt;
+&lt;a name="rest_code_700cc4d287544b2cb415034731d43a8a-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;adjusted_mutual_info_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;average_method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'arithmetic'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_700cc4d287544b2cb415034731d43a8a-3"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Skore mendekati nilai 1 untuk klaster yang identik."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7551191675800482
+Skore mendekati nilai 1 untuk klaster yang identik.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rand-index-adjusted"&gt;
+&lt;h3&gt;Rand index adjusted&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_1526c3499a83464f82df4fb0ff29e087-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;adjusted_rand_score&lt;/span&gt;
+&lt;a name="rest_code_1526c3499a83464f82df4fb0ff29e087-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;adjusted_rand_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_1526c3499a83464f82df4fb0ff29e087-3"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Skore mendekati nilai 1 untuk klaster yang identik."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7302382722834697
+Skore mendekati nilai 1 untuk klaster yang identik.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="calinski-and-harabaz-score"&gt;
+&lt;h3&gt;Calinski and Harabaz score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_e0c3a776f72f4b8dbba2398776b7bf62-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;calinski_harabaz_score&lt;/span&gt;
+&lt;a name="rest_code_e0c3a776f72f4b8dbba2398776b7bf62-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;calinski_harabaz_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_e0c3a776f72f4b8dbba2398776b7bf62-3"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Skore menunjukkan rasio dispersi dalam klaster terhadap dispersi antar klaster."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+560.3999242466401
+Skore menunjukkan rasio dispersi dalam klaster terhadap dispersi antar klaster.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="davies-bouldin-score"&gt;
+&lt;h3&gt;Davies-Bouldin score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_901f28e646f44d368d1df6d879393102-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;davies_bouldin_score&lt;/span&gt;
+&lt;a name="rest_code_901f28e646f44d368d1df6d879393102-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;davies_bouldin_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_901f28e646f44d368d1df6d879393102-3"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"Skore menunjukkan rasio jarak dalam klaster terhadap jarak antar klaster."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.6623228649898758
+Skore menunjukkan rasio jarak dalam klaster terhadap jarak antar klaster.
+&lt;/pre&gt;
+&lt;pre class="literal-block"&gt;
+C:WPy64-3720python-3.7.2.amd64libsite-packagessklearnmetricsclusterunsupervised.py:342: RuntimeWarning: divide by zero encountered in true_divide
+  score = (intra_dists[:, None] + intra_dists) / centroid_distances
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="completeness-score"&gt;
+&lt;h3&gt;Completeness Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_1adf5679602f414397cd958f3560595d-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;completeness_score&lt;/span&gt;
+&lt;a name="rest_code_1adf5679602f414397cd958f3560595d-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;completeness_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;a name="rest_code_1adf5679602f414397cd958f3560595d-3"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"*Completeness* menunjukkan apakah semua titik data untuk kelompok yang sama merupakan anggota klaster yang sama."&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7649861514489815
+&lt;em&gt;Completeness&lt;/em&gt; menunjukkan apakah semua titik data untuk kelompok yang sama merupakan anggota klaster yang sama.
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="contingency-matrix"&gt;
+&lt;h3&gt;Contingency Matrix&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_1ef08373264b4bbe9cb44004f51c4e55-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics.cluster&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;contingency_matrix&lt;/span&gt;
+&lt;a name="rest_code_1ef08373264b4bbe9cb44004f51c4e55-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;contingency_matrix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;eps&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sparse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[[ 0 50  0]
+ [ 2  0 48]
+ [36  0 14]]
+&lt;/pre&gt;
+&lt;p&gt;Matriks antara nilai sebenarnya dengan nilai prediksi. Matrix ini serupa
+dengan &lt;em&gt;Confusion Matrix&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fowlkes-mallows-score"&gt;
+&lt;h3&gt;Fowlkes Mallows Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_203240f0a7f9480cbefa1284cde927e6-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;fowlkes_mallows_score&lt;/span&gt;
+&lt;a name="rest_code_203240f0a7f9480cbefa1284cde927e6-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fowlkes_mallows_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.8208080729114153
+&lt;/pre&gt;
+&lt;p&gt;Skore bernilai antara 0 sampai dengan 1. Semakin tinggi nilai semakin
+bagus tingkat kesamaan antara nilai sebenarnya dengan nilai prediksi.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="homogeneity-and-completeness"&gt;
+&lt;h3&gt;Homogeneity and Completeness&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_4ae2262efa844861a6bd78e9f4e3002d-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;homogeneity_completeness_v_measure&lt;/span&gt;
+&lt;a name="rest_code_4ae2262efa844861a6bd78e9f4e3002d-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;homogeneity_completeness_v_measure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+(0.7514854021988338, 0.7649861514489815, 0.7581756800057784)
+&lt;/pre&gt;
+&lt;p&gt;Mempunyai nilai antara 0.0 sampai dengan 1.0. Nilai yang baik adalah
+nilai yang mendekati 1.0&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="homogeneity-score"&gt;
+&lt;h3&gt;Homogeneity Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_c282a80f4834444facbc983dd5c63cbb-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;homogeneity_score&lt;/span&gt;
+&lt;a name="rest_code_c282a80f4834444facbc983dd5c63cbb-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;homogeneity_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7514854021988338
+&lt;/pre&gt;
+&lt;p&gt;Skor antara 0.0 sampai dengan 1.0. Skor 1.0 menunjukkan labelisasi
+homogen&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="mutual-info-score"&gt;
+&lt;h3&gt;Mutual Info Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_edb7ec8fa6c84f778c81d8ab1ab45348-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mutual_info_score&lt;/span&gt;
+&lt;a name="rest_code_edb7ec8fa6c84f778c81d8ab1ab45348-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;mutual_info_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;contingency&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.8255910976103356
+&lt;/pre&gt;
+&lt;p&gt;Nilai yang didasarkan pada perhitungan &lt;em&gt;contingency matrix&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="normalized-mutual-info-score"&gt;
+&lt;h3&gt;Normalized Mutual Info Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_ab593056069d455db0a1dc0ac9acc8eb-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;normalized_mutual_info_score&lt;/span&gt;
+&lt;a name="rest_code_ab593056069d455db0a1dc0ac9acc8eb-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;normalized_mutual_info_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;average_method&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'arithmetic'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7581756800057784
+&lt;/pre&gt;
+&lt;p&gt;Skor antara 0.0 sampai dengan 1.0. Skor 1.0 menunjukkan labelisasi total&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="silhouette-score"&gt;
+&lt;h3&gt;Silhouette Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_663d56ebcf1d41199ed0dbf93d667304-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;silhouette_score&lt;/span&gt;
+&lt;a name="rest_code_663d56ebcf1d41199ed0dbf93d667304-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;silhouette_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.5525919445499756
+&lt;/pre&gt;
+&lt;p&gt;Nilai paling bagus adalah 1 dan nilai paling jelek adalah -1. Nilai
+mendekati 0 menunjukkan klaster yang tumpang tindih. Nilai negatif
+menunjukkan bahwa sampel dikelompokkan ke dalam klaster yang salah&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="silhouette-samples"&gt;
+&lt;h3&gt;Silhouette Samples&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_869743767c904e519a09df5774664350-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;silhouette_samples&lt;/span&gt;
+&lt;a name="rest_code_869743767c904e519a09df5774664350-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;silhouette_samples&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+[0.85157298 0.817887   0.83008729 0.8065908  0.84699565 0.74628444
+ 0.8210796  0.85340748 0.75384818 0.82895302 0.80150542 0.83563957
+ 0.81325176 0.74707696 0.70091086 0.64149392 0.77354754 0.84964579
+ 0.70548523 0.8178354  0.78413148 0.8237893  0.79157875 0.79422255
+ 0.77521625 0.80130908 0.8329435  0.84096492 0.84314169 0.81915866
+ 0.81735915 0.79854746 0.76017812 0.71993736 0.82895302 0.83285788
+ 0.79335138 0.82895302 0.7698255  0.84989778 0.84788216 0.6413782
+ 0.78707116 0.7991425  0.74523195 0.81162359 0.81106264 0.8198735
+ 0.81643527 0.85237895 0.02672203 0.38118643 0.05340075 0.59294381
+ 0.36885321 0.59221025 0.28232583 0.26365142 0.34419223 0.57829491
+ 0.3733641  0.58710354 0.55107857 0.48216686 0.56268236 0.32459291
+ 0.55751057 0.61072967 0.46149897 0.6115753  0.32909528 0.58968904
+ 0.31046301 0.49424779 0.5000461  0.38548959 0.12629433 0.11798213
+ 0.55293611 0.50620254 0.59466094 0.56000896 0.61972579 0.26087292
+ 0.54077013 0.41598629 0.16655431 0.48935747 0.60716023 0.61436443
+ 0.59560929 0.50352722 0.62444848 0.29200997 0.62754454 0.60657448
+ 0.62205599 0.55780204 0.13937138 0.63064081 0.49927538 0.23225278
+ 0.61193633 0.36075942 0.5577792  0.54384277 0.46682151 0.55917348
+ 0.44076207 0.56152256 0.26062588 0.22965423 0.55509948 0.28503067
+ 0.02635881 0.39825264 0.42110831 0.49486598 0.48341063 0.32868889
+ 0.6070348  0.33355947 0.51237366 0.20297372 0.580154   0.57818326
+ 0.30904249 0.25226992 0.45434264 0.51608826 0.56017398 0.48442397
+ 0.46255248 0.13900039 0.05328614 0.55186784 0.45549975 0.3887791
+ 0.35124673 0.53444618 0.5702338  0.41025549 0.23225278 0.61324746
+ 0.5670778  0.42513648 0.10417086 0.31493016 0.35245379 0.18544229]
+&lt;/pre&gt;
+&lt;p&gt;Nilai paling bagus adalah 1 dan nilai paling jelek adalah -1. Nilai
+mendekati 0 menunjukkan klaster yang tumpang tindih.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="v-measure-score"&gt;
+&lt;h3&gt;v_measure Score&lt;/h3&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_0afed3c55992488d9f139ceb1230ee06-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.metrics&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;v_measure_score&lt;/span&gt;
+&lt;a name="rest_code_0afed3c55992488d9f139ceb1230ee06-2"&gt;&lt;/a&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v_measure_score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y_kmeans&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+0.7581756800057784
+&lt;/pre&gt;
+&lt;p&gt;Skor antara 0.0 sampai dengan 1.0. Skor 1.0 menunjukkan labelisasi total&lt;/p&gt;
+&lt;pre class="code ipython3"&gt;&lt;a name="rest_code_9fe75b9d3fae4d5d91ecaf497ee72245-1"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.cluster&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;k_means&lt;/span&gt;
+&lt;a name="rest_code_9fe75b9d3fae4d5d91ecaf497ee72245-2"&gt;&lt;/a&gt;&lt;span class="n"&gt;k_means&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_clusters&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sample_weight&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'k-means++'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;precompute_distances&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'auto'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_init&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tol&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.0001&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;random_state&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;copy_x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_jobs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;algorithm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'auto'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;return_n_iter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;pre class="literal-block"&gt;
+(array([[5.006     , 3.418     , 1.464     , 0.244     ],
+        [5.9016129 , 2.7483871 , 4.39354839, 1.43387097],
+        [6.85      , 3.07368421, 5.74210526, 2.07105263]]),
+ array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2,
+        2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2,
+        2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 1]),
+ 78.94084142614602,
+ 6)
+&lt;/pre&gt;
+&lt;p&gt;Fungsi k_means di atas akan memberikan &lt;em&gt;array&lt;/em&gt; berisi &lt;em&gt;Centroid&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Array&lt;/em&gt; berisi &lt;em&gt;Label&lt;/em&gt;, &lt;em&gt;Inertia&lt;/em&gt; dan jumlah &lt;em&gt;Iterasi&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>Clustering</category><category>KMeans</category><category>Python</category><category>sklearn</category><guid>https://github.com/posts/kmeans/</guid><pubDate>Sat, 04 May 2019 17:00:00 GMT</pubDate></item></channel></rss>

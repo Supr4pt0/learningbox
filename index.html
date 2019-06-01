@@ -13,7 +13,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS (id)" href="rss.xml">
 <link rel="canonical" href="https://github.com/Supr4pt0?tab=repositories/">
 <meta property="fb:app_id" content="">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/kmeans/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/belajar-lda-menggunakan-python/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Lanjutkan ke konten utama</a>
@@ -75,7 +75,497 @@
     
         
     <div class="postindex">
-            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/kmeans/" class="u-url">Belajar KMeans Menggunakan Python </a></h1>
+            <article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/belajar-lda-menggunakan-python/" class="u-url">Belajar LDA Menggunakan Python</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        Suprapto van Plaosan
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/belajar-lda-menggunakan-python/" rel="bookmark">
+            <time class="published dt-published" datetime="2019-06-01T21:32:55+07:00" itemprop="datePublished" title="2019-06-01 21:32">2019-06-01 21:32</time></a>
+            </p>
+                        <p class="commentline">
+        
+<span class="fb-comments-count" data-url="/posts/belajar-lda-menggunakan-python/">
+
+
+                </span></p>
+</div>
+            </header><div class="e-content entry-content">
+                    <div>
+<pre class="code ipython3"><a name="rest_code_5ec1a3d727344b23b3dac3b09a6f2ee9-1"></a><span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="k">import</span> <span class="n">LinearDiscriminantAnalysis</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_a39f940b3f5145828bcf38fe20440d73-1"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a name="rest_code_a39f940b3f5145828bcf38fe20440d73-2"></a><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'iris.csv'</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_37fdd820f8524b75994948327d9988c0-1"></a><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Unnamed: 0'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a name="rest_code_37fdd820f8524b75994948327d9988c0-2"></a><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>class</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<pre class="code ipython3"><a name="rest_code_7b8351c8f5c54815a411052d837138c2-1"></a><span class="n">X</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<a name="rest_code_7b8351c8f5c54815a411052d837138c2-2"></a><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<pre class="code ipython3"><a name="rest_code_22eb70848cad47b0a87ca311b3ec8a25-1"></a><span class="n">Y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span>
+<a name="rest_code_22eb70848cad47b0a87ca311b3ec8a25-2"></a><span class="n">Y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<pre class="literal-block">
+0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
+</pre>
+<pre class="code ipython3"><a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-1"></a><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span>
+<a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-2"></a><span class="n">lbe</span><span class="o">=</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-3"></a><span class="n">Y</span><span class="o">=</span><span class="n">lbe</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<a name="rest_code_1a8bb31855f94bf6ae385e0e76efb225-4"></a><span class="n">Y</span>
+</pre>
+<pre class="literal-block">
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+</pre>
+<pre class="code ipython3"><a name="rest_code_15f1e76b0c5542c19772ee931f1ae822-1"></a><span class="n">lda</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_a771d44328a148b99ce479ad003aa81a-1"></a><span class="n">x_lda</span><span class="o">=</span><span class="n">lda</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_0f4111b990a745cb97660f12ada8387a-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-3"></a><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-4"></a><span class="o">%</span><span class="k">matplotlib</span> inline
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-5"></a>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-6"></a><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-7"></a><span class="n">ax</span><span class="o">=</span><span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">elev</span><span class="o">=-</span><span class="mi">150</span><span class="p">,</span><span class="n">azim</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-8"></a><span class="n">colormap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">'red'</span><span class="p">,</span><span class="s1">'blue'</span><span class="p">,</span><span class="s1">'purple'</span><span class="p">])</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-9"></a><span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_lda</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_lda</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">colormap</span><span class="p">[</span><span class="n">Y</span><span class="p">])</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-10"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"First three LDA directions"</span><span class="p">)</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-11"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"1st Kolom"</span><span class="p">)</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-12"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-13"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"2nd Kolom"</span><span class="p">)</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-14"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_yaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-15"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">"3rd Kolom"</span><span class="p">)</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-16"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_zaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_0f4111b990a745cb97660f12ada8387a-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre>
+<img alt="output_8_0.png" src="posts/belajar-lda-menggunakan-python/output_8_0.png"><pre class="code ipython3"><a name="rest_code_937bc80cdf954484a132360dce986a51-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<a name="rest_code_937bc80cdf954484a132360dce986a51-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_lda</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_lda</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">colormap</span><span class="p">[</span><span class="n">Y</span><span class="p">])</span>
+<a name="rest_code_937bc80cdf954484a132360dce986a51-3"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"1st Kolom"</span><span class="p">)</span>
+<a name="rest_code_937bc80cdf954484a132360dce986a51-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"2nd Kolom"</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+Text(0, 0.5, '2nd Kolom')
+</pre>
+<img alt="output_9_1.png" src="posts/belajar-lda-menggunakan-python/output_9_1.png">
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/belajar-pca-menggunakan-python/" class="u-url">Belajar PCA Menggunakan Python</a></h1>
+                <div class="metadata">
+                    <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                        Suprapto van Plaosan
+                    </span></p>
+            <p class="dateline">
+            <a href="posts/belajar-pca-menggunakan-python/" rel="bookmark">
+            <time class="published dt-published" datetime="2019-06-01T21:18:24+07:00" itemprop="datePublished" title="2019-06-01 21:18">2019-06-01 21:18</time></a>
+            </p>
+                        <p class="commentline">
+        
+<span class="fb-comments-count" data-url="/posts/belajar-pca-menggunakan-python/">
+
+
+                </span></p>
+</div>
+            </header><div class="e-content entry-content">
+                    <div>
+<div class="figure">
+<a class="reference external image-reference" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Moofushi_Kandu_fish.jpg/450px-Moofushi_Kandu_fish.jpg"><img alt="" class="thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Moofushi_Kandu_fish.jpg/450px-Moofushi_Kandu_fish.jpg"></a>
+</div>
+<p>Photo by: Bruno de Giusti - Own work, An underwater picture taken in Moofushi Kandu, Maldives, showing a huge amount of fish./Creative Commons License</p>
+<p>Untuk mengklasterisasi data menggunakan Software Python, kita perlu mengimpor PCA dari scikitlearn decomposition.</p>
+<pre class="code ipython3"><a name="rest_code_cea4558051954cdfab20a9e6609e3b76-1"></a><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
+</pre>
+<p>Pada contoh ini kita akan mengklasterisasi dataset bungan iris menggunakan PCA.</p>
+<pre class="code ipython3"><a name="rest_code_dea2bf940dad46d999db8e98021dac77-1"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a name="rest_code_dea2bf940dad46d999db8e98021dac77-2"></a><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'iris.csv'</span><span class="p">)</span>
+</pre>
+<p>Berikut adalah 5 data pertama dari dataset bunga iris yang akan kita klasterisasi.</p>
+<pre class="code ipython3"><a name="rest_code_8f0319094af6415a902f7d58a77d3274-1"></a><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Unnamed: 0'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a name="rest_code_8f0319094af6415a902f7d58a77d3274-2"></a><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>class</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>Iris-setosa</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<p>Data dalam kolom 1 sampai dengan 4 akan kita klasterisasi dengan PCA untuk mengetahui apakah PCA bisa membedakan masing-masing spesies bunga iris.</p>
+<pre class="code ipython3"><a name="rest_code_5e1558273a434765825e1cea194b4316-1"></a><span class="n">X</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<a name="rest_code_5e1558273a434765825e1cea194b4316-2"></a><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead><tr style="text-align: right;">
+<th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+    </tr></thead>
+<tbody>
+<tr>
+<th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+<tr>
+<th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<p>Sedangan data spesies akan kita gunakan untuk pelabelan masing-masing titik pada klaster PCA.</p>
+<pre class="code ipython3"><a name="rest_code_5bb640efd70341a0a5afa4e6be6776ad-1"></a><span class="n">Y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">'class'</span><span class="p">]</span>
+<a name="rest_code_5bb640efd70341a0a5afa4e6be6776ad-2"></a><span class="n">Y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+<pre class="literal-block">
+0    Iris-setosa
+1    Iris-setosa
+2    Iris-setosa
+3    Iris-setosa
+4    Iris-setosa
+Name: class, dtype: object
+</pre>
+<p>Karena data spesies berupa "string", kita akan rubah masing-masing spesies ke dalam kode angka. Angka 0 untuk Iris Setosa, 1 untuk Iris Versicolor dan 2 untuk Iris Virginica.</p>
+<pre class="code ipython3"><a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-1"></a><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">LabelEncoder</span>
+<a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-2"></a><span class="n">lbe</span><span class="o">=</span><span class="n">LabelEncoder</span><span class="p">()</span>
+<a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-3"></a><span class="n">Y</span><span class="o">=</span><span class="n">lbe</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<a name="rest_code_ecfa27b61e3d4bcd883643b628faad7c-4"></a><span class="n">Y</span>
+</pre>
+<pre class="literal-block">
+array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+</pre>
+<p>Data X diklasterisasi dengan komponen klaster sebanyak 3 dan didapatkan matriks kovarians.</p>
+<pre class="code ipython3"><a name="rest_code_89028db434c849f2a44dcb279779e35f-1"></a><span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_f76e3d0f5a974086969b23fdb3e484ef-1"></a><span class="n">x_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_581e3ca5859f45e897863611cd8a2709-1"></a><span class="n">covmat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x_pca</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_a4ab33f5c0ed418a955cbb2ba7eea2aa-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">covmat</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+[[ 4.22484077e+00 -2.94320869e-16  8.79237026e-17]
+ [-2.94320869e-16  2.42243572e-01 -2.26329023e-17]
+ [ 8.79237026e-17 -2.26329023e-17  7.85239081e-02]]
+</pre>
+<p>Dari data matriks kovarians dicari nilai "eigenvalue" dan "eigenvector" nya. Kemudian didapatkan nilai "explained variance" yang akan digunakn untuk menggambar "scree plot".</p>
+<pre class="code ipython3"><a name="rest_code_a50974bdbc414f3288bfa21935073944-1"></a><span class="n">eigenval</span><span class="p">,</span> <span class="n">eigenvec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">covmat</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_dda8b800a85c4eec8091e1b4bd240ac5-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">eigenval</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+[4.22484077 0.24224357 0.07852391]
+</pre>
+<pre class="code ipython3"><a name="rest_code_bbd851081fac429ea7e1b544439c9340-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">eigenvec</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+[[ 1.00000000e+00 -7.39017416e-17 -2.12052541e-17]
+ [ 0.00000000e+00 -1.00000000e+00  1.95787855e-16]
+ [ 0.00000000e+00  1.11022302e-16  1.00000000e+00]]
+</pre>
+<pre class="code ipython3"><a name="rest_code_4d2b0e312b55410c81c6cf253bd92bbe-1"></a><span class="n">eig_pairs</span><span class="o">=</span><span class="p">[(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eigenval</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">eigenvec</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eigenval</span><span class="p">))]</span>
+<a name="rest_code_4d2b0e312b55410c81c6cf253bd92bbe-2"></a><span class="n">tot</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">eigenval</span><span class="p">)</span>
+</pre>
+<pre class="code ipython3"><a name="rest_code_66c857df2e3f485cb893ef5961e45281-1"></a><span class="n">var_exp</span><span class="o">=</span><span class="p">[(</span><span class="n">i</span><span class="o">/</span><span class="n">tot</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">eigenval</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)]</span>
+<a name="rest_code_66c857df2e3f485cb893ef5961e45281-2"></a><span class="n">var_exp</span>
+</pre>
+<pre class="literal-block">
+[92.94335406356555, 5.32917837193454, 1.727467564499914]
+</pre>
+<pre class="code ipython3"><a name="rest_code_133fca8d7af14a4fa40a7ffb5a3b6c27-1"></a><span class="n">cum_var_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">var_exp</span><span class="p">)</span>
+<a name="rest_code_133fca8d7af14a4fa40a7ffb5a3b6c27-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">cum_var_exp</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+[ 92.94335406  98.27253244 100.        ]
+</pre>
+<pre class="code ipython3"><a name="rest_code_d525dd453b6841ad815cbe214d31af92-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-3"></a>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-4"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="n">var_exp</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">'Individual Explained Variance'</span><span class="p">)</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="n">cum_var_exp</span><span class="p">,</span> <span class="s1">'r-'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">'mid'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">'Cumulative Explained Variance'</span><span class="p">)</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Explained Variance Ratio'</span><span class="p">)</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Principal Component'</span><span class="p">)</span>
+<a name="rest_code_d525dd453b6841ad815cbe214d31af92-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'best'</span><span class="p">)</span>
+</pre>
+<pre class="literal-block">
+&lt;matplotlib.legend.Legend at 0xc90efaf630&gt;
+</pre>
+<img alt="output_17_1.png" src="posts/belajar-pca-menggunakan-python/output_17_1.png"><p>Kurva "scatter" tiga dimensi dibuat dengan sumbu berupa "eigenvector" pertama sebagai sumbu "x", "eigenvector" kedua sebagai sumbu "y" dan "eigenvector" ketiga sebagai sumbu "z".</p>
+<pre class="code ipython3"><a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-1"></a><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="k">import</span> <span class="n">Axes3D</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-2"></a>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-3"></a><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-4"></a><span class="n">ax</span><span class="o">=</span><span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span><span class="n">elev</span><span class="o">=-</span><span class="mi">150</span><span class="p">,</span><span class="n">azim</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-5"></a><span class="n">colormap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">'red'</span><span class="p">,</span><span class="s1">'blue'</span><span class="p">,</span><span class="s1">'purple'</span><span class="p">])</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-6"></a><span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">colormap</span><span class="p">[</span><span class="n">Y</span><span class="p">])</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-7"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"First three PCA directions"</span><span class="p">)</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-8"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"1st eigenvector"</span><span class="p">)</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-9"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_xaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-10"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"2nd eigenvector"</span><span class="p">)</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-11"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_yaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-12"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">"3rd eigenvector"</span><span class="p">)</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-13"></a><span class="n">ax</span><span class="o">.</span><span class="n">w_zaxis</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">([])</span>
+<a name="rest_code_8ddc7b752c564303bcb33319d2ea4272-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre>
+<img alt="output_18_0.png" src="posts/belajar-pca-menggunakan-python/output_18_0.png"><p>Kurva "scatter" dua dimensi juga bisa ditampilkan menggunakan "eigenvector" pertama sebagai sumbu "x" dan "eigenvector" kedua sebagai sumbu "y"</p>
+<pre class="code ipython3"><a name="rest_code_a26fe0de41f94f11a8aa3cb80eda88b9-1"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<a name="rest_code_a26fe0de41f94f11a8aa3cb80eda88b9-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_pca</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_pca</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">'k'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">colormap</span><span class="p">[</span><span class="n">Y</span><span class="p">])</span>
+</pre>
+<pre class="literal-block">
+&lt;matplotlib.collections.PathCollection at 0xc90d99dc50&gt;
+</pre>
+<img alt="output_19_1.png" src="posts/belajar-pca-menggunakan-python/output_19_1.png">
+</div>
+                </div>
+            </article><article class="h-entry post-text" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title"><a href="posts/kmeans/" class="u-url">Belajar KMeans Menggunakan Python </a></h1>
                 <div class="metadata">
                     <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
                         Suprapto van Plaosan
