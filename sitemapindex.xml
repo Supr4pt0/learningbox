@@ -6,87 +6,43 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/cat_data-aanalysis.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/categories/blog.xml</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/cat_data-analysis.xml</loc>
-  <lastmod>2019-06-01T22:08:00Z</lastmod>
+  <loc>https://example.com/categories/cat_nikola.xml</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/cat_nikola.xml</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
+  <loc>https://example.com/categories/demo.xml</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/clustering.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/categories/nikola.xml</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/kmeans.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/categories/python.xml</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/pca.xml</loc>
-  <lastmod>2019-06-01T22:08:00Z</lastmod>
+  <loc>https://example.com/galleries/.ipynb_checkpoints/rss.xml</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/python.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/galleries/demo/rss.xml</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/categories/sklearn.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/galleries/rss.xml</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_data-aanalysis.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
+  <loc>https://example.com/rss.xml</loc>
+  <lastmod>2019-06-02T03:17:00Z</lastmod>
  </sitemap>
  <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_data-analysis.xml</loc>
-  <lastmod>2019-06-01T22:08:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_nikola.xml</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/clustering.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/kmeans.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/pca.xml</loc>
-  <lastmod>2019-06-01T22:08:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/python.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/categories/sklearn.xml</loc>
-  <lastmod>2019-05-06T01:59:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/galleries/rss.xml</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/en/rss.xml</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/galleries/rss.xml</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/rss.xml</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
- </sitemap>
- <sitemap>
-  <loc>https://github.com/Supr4pt0/sitemap.xml</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
+  <loc>https://example.com/sitemap.xml</loc>
+  <lastmod>2019-06-02T03:17:00Z</lastmod>
  </sitemap>
 </sitemapindex>

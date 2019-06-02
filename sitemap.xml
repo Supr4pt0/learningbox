@@ -6,149 +6,143 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https://github.com/Supr4pt0/</loc>
-  <lastmod>2019-06-01T14:30:00Z</lastmod>
+  <loc>https://example.com/</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/2019/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/2012/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/archive.html</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
+  <loc>https://example.com/2017/</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/2019/</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/cat_data-aanalysis/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/archive.html</loc>
+  <lastmod>2019-06-02T03:17:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/cat_data-analysis/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/categories/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/cat_nikola/</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
+  <loc>https://example.com/categories/blog/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/clustering/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/categories/cat_nikola/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/kmeans/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/categories/demo/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/pca/</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
+  <loc>https://example.com/categories/nikola/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/python/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/categories/python/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/categories/sklearn/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/galleries/</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/galleries/.ipynb_checkpoints/</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/2019/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/galleries/demo/</loc>
+  <lastmod>2019-06-01T12:31:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/archive.html</loc>
-  <lastmod>2019-06-02T00:06:00Z</lastmod>
+  <loc>https://example.com/listings/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/listings/hello.py.html</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_data-aanalysis/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/09-pca/</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_data-analysis/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/pages/about-nikola/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/cat_nikola/</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
+  <loc>https://example.com/pages/bootstrap-demo/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/clustering/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/charts/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/kmeans/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/creating-a-theme/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/pca/</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
+  <loc>https://example.com/pages/dr-nikolas-vendetta/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/python/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/extending/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/categories/sklearn/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/internals/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/galleries/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/listings-demo/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/posts/belajar-lda-menggunakan-python/</loc>
-  <lastmod>2019-06-01T14:42:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/belajar-lda-menggunakan-python/" />
+  <loc>https://example.com/pages/manual/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/posts/belajar-pca-dengan-python/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/pages/path_handlers/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/posts/belajar-pca-menggunakan-python/</loc>
-  <lastmod>2019-06-01T14:18:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/belajar-pca-menggunakan-python/" />
+  <loc>https://example.com/pages/quickref/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/en/posts/kmeans/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/kmeans/" />
+  <loc>https://example.com/pages/quickstart/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/galleries/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/social_buttons/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/listings/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
+  <loc>https://example.com/pages/theming/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/posts/belajar-lda-menggunakan-python/</loc>
-  <lastmod>2019-06-01T14:42:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/belajar-lda-menggunakan-python/" />
+  <loc>https://example.com/posts/belajar-kmeans-menggunakan-python/</loc>
+  <lastmod>2019-06-02T03:04:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/posts/belajar-pca-dengan-python/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
+  <loc>https://example.com/posts/creating-a-blog-with-jupyter-notebooks/</loc>
+  <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/posts/belajar-pca-menggunakan-python/</loc>
-  <lastmod>2019-06-01T14:33:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/belajar-pca-menggunakan-python/" />
+  <loc>https://example.com/posts/welcome-to-learningbox/</loc>
+  <lastmod>2019-06-01T12:22:00Z</lastmod>
  </url>
  <url>
-  <loc>https://github.com/Supr4pt0/posts/kmeans/</loc>
-  <lastmod>2019-05-05T16:34:00Z</lastmod>
-  <xhtml:link rel="alternate" hreflang="id" href="https://github.com/posts/kmeans/" />
+  <loc>https://example.com/posts/welcome-to-nikola/</loc>
+  <lastmod>2019-06-01T12:01:00Z</lastmod>
  </url>
 </urlset>
