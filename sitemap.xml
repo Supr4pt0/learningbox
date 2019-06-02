@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>https://example.com/</loc>
-  <lastmod>2019-06-02T02:55:00Z</lastmod>
+  <lastmod>2019-06-02T06:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/2012/</loc>
@@ -18,12 +18,16 @@
   <lastmod>2019-06-02T02:55:00Z</lastmod>
  </url>
  <url>
+  <loc>https://example.com/2018/</loc>
+  <lastmod>2019-06-02T06:58:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://example.com/2019/</loc>
   <lastmod>2019-06-01T12:22:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/archive.html</loc>
-  <lastmod>2019-06-02T03:17:00Z</lastmod>
+  <lastmod>2019-06-02T06:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/categories/</loc>
@@ -128,6 +132,10 @@
  <url>
   <loc>https://example.com/pages/theming/</loc>
   <lastmod>2019-06-01T12:01:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://example.com/posts/belajar-PCA-menggunakan-python/</loc>
+  <lastmod>2019-06-02T06:58:00Z</lastmod>
  </url>
  <url>
   <loc>https://example.com/posts/belajar-kmeans-menggunakan-python/</loc>
