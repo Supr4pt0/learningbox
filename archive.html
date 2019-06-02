@@ -1,67 +1,94 @@
 <!DOCTYPE html>
-<html prefix="" lang="id">
+<html lang="id">
 <head>
 <meta charset="utf-8">
 <meta name="description" content="My learning room for python data analysis">
 <meta name="viewport" content="width=device-width">
 <title>Arsip | LearningBox</title>
-<link href="assets/css/all.css" rel="stylesheet" type="text/css">
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
-<meta content="#5670d4" name="theme-color">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="https://example.com/archive.html">
 <!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
 </head>
 <body>
+<a href="#content" class="sr-only sr-only-focusable">Lanjutkan ke konten utama</a>
 
-    
+<!-- Menubar -->
 
-    
-<div class="top-bar">
-<div class="top-bar-left">
-<ul class="menu">
-<li class="menu-text"><a href="https://example.com/" title="LearningBox" rel="home">LearningBox</a></li>
-                <li><a href="#">Arsip</a></li>
-                <li><a href="categories/">Tag</a></li>
-    
-    
-    </ul>
+<div class="navbar navbar-static-top" id="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+            <a class="brand" href="https://example.com/">
+
+                <span id="blog-title">LearningBox</span>
+            </a>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+<li class="active">
+<a href="#">Arsip <span class="sr-only">(aktif)</span></a>
+                </li>
+<li>
+<a href="categories/">Tag</a>
+
+                    
+                </li>
+</ul>
+<ul class="nav pull-right">
+<li>
+                
+                </ul>
 </div>
+        </div>
+    </div>
 </div>
-
+<!-- End of Menubar -->
+<div class="container-fluid" id="content" role="main">
+    <!--Body content-->
+    <div class="row-fluid">
+    <div class="span2"></div>
+    <div class="span8">
     
-
-<div class="callout large primary">
-<div class="row column text-center">
-
-<h1>LearningBox</h1>
-<h2>Arsip</h2>
-
-</div>
-</div>
-
-<div class="row medium-8 large-7 columns">
-
-<article class="listpage"><ul class="menu vertical">
+    
+<article class="listpage"><header><h1>Arsip</h1>
+    </header><ul class="postlist">
 <li>
 <a href="2018/">2018</a>
-             <small>(1)</small>
+            (1)
         </li>
 <li>
 <a href="2017/">2017</a>
-             <small>(1)</small>
+            (1)
     </li>
-</ul></article><hr>
-<footer id="footer"><p><small>Contents © 2019         <a href="mailto:van.plaosan@gmail.com">Suprapto van Plaosan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         </small></p>
-            
-        </footer>
+</ul></article>
+</div>
+    </div>
+    <!--End of body content-->
+</div>
+<div class="footerbox">
+    Contents © 2019         <a href="mailto:van.plaosan@gmail.com">Suprapto van Plaosan</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+    
 </div>
 
-    
-
-
-
-
+            <script src="assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("id");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates --><script>
+    baguetteBox.run('div#content', {
+        ignoreClass: 'islink',
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+    }});
+    </script>
 </body>
 </html>
