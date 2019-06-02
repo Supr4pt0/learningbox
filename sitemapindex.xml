@@ -27,15 +27,15 @@
  </sitemap>
  <sitemap>
   <loc>https://example.com/galleries/.ipynb_checkpoints/rss.xml</loc>
-  <lastmod>2019-06-02T02:55:00Z</lastmod>
+  <lastmod>2019-06-02T07:15:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://example.com/galleries/demo/rss.xml</loc>
-  <lastmod>2019-06-02T02:55:00Z</lastmod>
+  <lastmod>2019-06-02T07:15:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://example.com/galleries/rss.xml</loc>
-  <lastmod>2019-06-02T02:55:00Z</lastmod>
+  <lastmod>2019-06-02T07:15:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://example.com/rss.xml</loc>
@@ -43,6 +43,6 @@
  </sitemap>
  <sitemap>
   <loc>https://example.com/sitemap.xml</loc>
-  <lastmod>2019-06-02T06:58:00Z</lastmod>
+  <lastmod>2019-06-02T07:15:00Z</lastmod>
  </sitemap>
 </sitemapindex>
