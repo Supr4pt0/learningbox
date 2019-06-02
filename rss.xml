@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LearningBox</title><link>https://example.com/</link><description>My learning room for python data analysis</description><atom:link href="https://example.com/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>id</language><copyright>Contents © 2019 &lt;a href="mailto:van.plaosan@gmail.com"&gt;Suprapto van Plaosan&lt;/a&gt; </copyright><lastBuildDate>Sun, 02 Jun 2019 03:17:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Belajar KMeans Menggunakan Python</title><link>https://example.com/posts/belajar-kmeans-menggunakan-python/</link><dc:creator>Suprapto van Plaosan</dc:creator><description>&lt;div&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LearningBox</title><link>https://example.com/</link><description>My learning room for python data analysis</description><atom:link href="https://example.com/rss.xml" rel="self" type="application/rss+xml"></atom:link><language>id</language><copyright>Contents © 2019 &lt;a href="mailto:van.plaosan@gmail.com"&gt;Suprapto van Plaosan&lt;/a&gt; </copyright><lastBuildDate>Sun, 02 Jun 2019 04:47:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Belajar KMeans Menggunakan Python</title><link>https://example.com/posts/belajar-kmeans-menggunakan-python/</link><dc:creator>Suprapto van Plaosan</dc:creator><description>&lt;div&gt;&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;img src="http://farm4.static.flickr.com/3328/3408434781_0ab94911a4.jpg"&gt;
+Woodstack 8, originally uploaded by stevenjbaker. (&lt;a href="https://www.stevebaker.info/2009/04/austrian-wood-stack/"&gt;https://www.stevebaker.info/2009/04/austrian-wood-stack/&lt;/a&gt; creative-common)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;&lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Klasterisasi data menggunakan KMeans merupakan algoritma yang sangat populer karena kemudahannya. Data akan dikelompokkan berdasarkan kedekatan masing-masing titik data pada titik beratnya. Secara umum, data yang jaraknya dekat biasanya mempunyai kesamaan yang lebih besar daripada data yang jaraknya jauh. Jarak antar data biasanya diukur menggunakan &lt;em&gt;Eucledian Distance&lt;/em&gt;.&lt;/p&gt;
@@ -42,6 +58,19 @@
 &lt;div class="inner_cell"&gt;
     &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [ ]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 
     &lt;/div&gt;
